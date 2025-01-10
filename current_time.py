@@ -14,27 +14,23 @@ def time(formatting):
 
     # Handle locale and get modifiers if any
     locale_setting = None
-    modifiers = []
     day_offset = 0
 
     if set_locale:
-        # Check for |+n syntax
-        if '|' in set_locale[0]:
-            locale_part, offset_part = set_locale[0].split('|')
-            locale_setting = locale_part
-            if offset_part.startswith('+'):
-                try:
-                    day_offset = int(offset_part[1:])
-                except ValueError:
-                    print(f"Invalid offset format: {offset_part}")
-            elif offset_part.startswith('-'):
-                try:
-                    day_offset = int(offset_part)  # minus sign is already included
-                except ValueError:
-                    print(f"Invalid offset format: {offset_part}")
+        locale_part = set_locale[0]
+        
+        # Handle direct offset syntax (|+n or |-n)
+        if '|' in locale_part:
+            locale_setting, offset_part = locale_part.split('|')
+            try:
+                day_offset = int(offset_part)  # Will handle both +n and -n
+            except ValueError:
+                print(f"Invalid offset format: {offset_part}")
+        
+        # Handle modifier syntax (U, E, O, A)
         else:
             # Handle original / syntax for modifiers
-            parts = set_locale[0].split('/')
+            parts = locale_part.split('/')
             locale_setting = parts[0]
             modifiers = parts[1:] if len(parts) > 1 else []
 
