@@ -4,6 +4,8 @@ import json
 import os
 import logging
 
+
+DEBUG = False # if false disable logging
 # Set up logging with fallback for __file__
 try:
     log_path = os.path.join(os.path.dirname(__file__), 'date_modifiers.log')
@@ -19,6 +21,7 @@ logging.basicConfig(
 # Define the maximum number of strokes in any translation
 LONGEST_KEY = 52  # Base stroke plus 51 modifiers
 
+
 # Modifier mapping
 MODIFIERS = {
     'U': 1,    # Forward one day
@@ -32,12 +35,14 @@ def format_time(formatting, locale_setting='de_DE'):
     try:
         # save current locale to restore it later
         current_locale = locale.getlocale()[0]
-        logging.debug(f"Current locale: {current_locale}")
+        if DEBUG:
+            logging.debug(f"Current locale: {current_locale}")
 
         # Set locale
         try:
             locale.setlocale(locale.LC_ALL, locale_setting)
-            logging.debug(f"Locale set to: {locale_setting}")
+            if DEBUG:
+                logging.debug(f"Locale set to: {locale_setting}")
         except locale.Error as e:
             logging.error(f"Failed to set locale {locale_setting}: {str(e)}")
             return f"[Locale Error: {locale_setting}]"
@@ -49,10 +54,12 @@ def format_time(formatting, locale_setting='de_DE'):
         if 'KW %W' in formatting:
             iso_year, iso_week, iso_day = now.isocalendar()
             formatting = formatting.replace('KW %W', f'KW {iso_week:02d}')
-            logging.debug(f"ISO week number: {iso_week}")
+            if DEBUG:
+                logging.debug(f"ISO week number: {iso_week}")
 
         formatted = now.strftime(formatting)
-        logging.debug(f"Formatted output: {formatted}")
+        if DEBUG:
+            logging.debug(f"Formatted output: {formatted}")
 
         # restore current locale
         locale.setlocale(locale.LC_ALL, current_locale)
@@ -83,7 +90,8 @@ def lookup(key):
         
         # Calculate offset from modifiers using sum()
         day_offset = sum(MODIFIERS.get(mod, 0) for mod in modifiers)
-        logging.debug(f"Base stroke: {base_stroke}, Modifiers: {modifiers}, Total day offset: {day_offset}")
+        if DEBUG:
+            logging.debug(f"Base stroke: {base_stroke}, Modifiers: {modifiers}, Total day offset: {day_offset}")
         
         # Get current time with offset
         now = datetime.datetime.now()
