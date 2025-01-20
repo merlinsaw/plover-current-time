@@ -1,0 +1,12 @@
+README.md
+setup.cfg
+setup.py
+plover_current_time_modal/__init__.py
+plover_current_time_modal/date_modifiers.py
+plover_current_time_modal.egg-info/PKG-INFO
+plover_current_time_modal.egg-info/SOURCES.txt
+plover_current_time_modal.egg-info/dependency_links.txt
+plover_current_time_modal.egg-info/entry_points.txt
+plover_current_time_modal.egg-info/requires.txt
+plover_current_time_modal.egg-info/top_level.txt
+plover_current_time_modal.egg-info/zip-safe

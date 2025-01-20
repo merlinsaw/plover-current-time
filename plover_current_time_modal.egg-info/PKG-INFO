@@ -1,3 +1,18 @@
+Metadata-Version: 2.2
+Name: plover_current_time_modal
+Version: 1.1.2
+Summary: Plover plugin for inserting the current time in an strftime format
+Home-page: https://github.com/merlinsaw/plover-current-time
+Author: Merlin Wyschka
+Author-email: s.a.w.merlin@gmail.com
+Keywords: plover plover_plugin
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+Requires-Dist: plover>=4.0.0.dev12
+
 # Current time 1.0.2
 
 > Plover plugin for inserting the current time in an `strftime()` format

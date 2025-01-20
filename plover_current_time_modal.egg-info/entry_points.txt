@@ -1,0 +1,3 @@
+[plover.dictionary]
+current_time = plover_current_time_modal.date_modifiers:lookup
+current_time_reverse = plover_current_time_modal.date_modifiers:reverse_lookup
